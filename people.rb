@@ -43,7 +43,8 @@ christina.greetings #call her greeting
 chris.teach
 christina.learn
 
-christina.teach #this leads to an error resulting from the teach method not being defined in the Student class, to which Christina belongs. Christina only has two methods: learning, and geetings (inherited from being part of the People class)
+
+# christina.teach #this leads to an error resulting from the teach method not being defined in the Student class, to which Christina belongs. Christina only has two methods: learning, and geetings (inherited from being part of the People class)
 
 
 
