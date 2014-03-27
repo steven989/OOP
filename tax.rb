@@ -34,6 +34,7 @@ class Receipt
 
     @all_items.each { |content|
 
+      content_clean = content[0..(content.index(" at")-1)]
       quantity = content.scan(/^[1-9][0-9]*/)[0]  
       amount = content.scan(/[0-9]+\.[0-9]{2}/)[-1]  #the scan can return multiple items; this will only pick the last item
       import_flag = content.scan(/import/i).length == 0 ? 0 : 1
@@ -51,14 +52,17 @@ class Receipt
 
       @cost += quantity.to_i * amount.to_f
 
-      @taxes += (((quantity.to_i * amount.to_f) * ((1-exempt_flag.to_i)*0.1) + (quantity.to_i * amount.to_f) * (import_flag.to_i * 0.05))*2.00).round/2.00
+
+      @taxes += (((quantity.to_i * amount.to_f) * ((1-exempt_flag.to_i)*0.1) + (quantity.to_i * amount.to_f) * (import_flag.to_i * 0.05))*20.00).round/20.00
+
+      puts "#{content_clean}: #{(@cost+@taxes).round(2)}"
+      puts ""
 
     }
 
-    @all_items.each {|x| puts x; puts ""}
-    puts "Sales Taxes: #{@taxes}"
+    puts "Sales Taxes: #{@taxes.round(2)}"
     puts ""
-    puts "Total: #{@cost+@taxes}"
+    puts "Total: #{(@cost+@taxes).round(2)}"
 
 
   end
